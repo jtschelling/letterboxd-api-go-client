@@ -1,6 +1,6 @@
 # letterboxd-api-go-client
 
-[![CI](https://github.com/jtschelling/letterboxd-api-go-client/workflows/test.yml/badge.svg?branch=main)](https://github.com/jtschelling/letterboxd-api-go-client/actions)
+[![CI](https://github.com/jtschelling/letterboxd-api-go-client/workflows/test.yml/badge.svg)](https://github.com/jtschelling/letterboxd-api-go-client/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jtschelling/letterboxd-api-go-client)](https://goreportcard.com/report/github.com/jtschelling/letterboxd-api-go-client)
 [![GoDoc](https://godoc.org/github.com/jtschelling/letterboxd-api-go-client?status.svg)](https://godoc.org/github.com/jtschelling/letterboxd-api-go-client)
 [![License](https://img.shields.io/github/license/jtschelling/letterboxd-api-go-client)](https://opensource.org/licenses/MIT)
