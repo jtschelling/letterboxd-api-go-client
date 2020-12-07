@@ -13,6 +13,21 @@ The Letterboxd API is in [private beta](https://letterboxd.com/api-beta/). Acces
 
 ## Usage
 
+### Request Signing
+
+Create a salted string of the form `[METHOD]\u0000[URL]\u0000[BODY]` where [METHOD] is GET, POST, etc., [URL] is the fully-qualified request URL including the `apikey, nonce, timestamp` and any other method parameters, and [BODY] is a JSON-encoded string (for POST, PATCH and DELETE requests) or empty (for GET requests).
+
+This computation is done in the request builder.
+
+Example:
+
+```{Golang}
+METHOD = "GET"
+URL = "https://api.letterboxd.com/api/v0/auth/token?apikey=FAKE_KEY&nonce=123-456-789&timestamp=1607292265"
+BODY = ""
+```
+
+
 ## Contributing
 
 Issues are tracked on Github and can be submitted [here](https://github.com/jtschelling/letterboxd-api-go-client/issues/new).

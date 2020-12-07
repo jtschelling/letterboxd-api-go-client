@@ -1,10 +1,5 @@
 package letterboxd
 
-import (
-	"net/http"
-	"time"
-)
-
 const (
 	// APIBaseURL is used to create a client
 	APIBaseURL = "https://api.letterboxd.com/api/v0"
@@ -12,10 +7,9 @@ const (
 
 // Client provides a common interface and plain configuration for interacting with this library
 type Client struct {
-	BaseURL    string
-	apiKey     string
-	apiSecret  string
-	HTTPClient *http.Client
+	BaseURL   string
+	apiKey    string
+	apiSecret string
 }
 
 // NewClientFromKey creates a letterboxd API client from an auth token
@@ -24,9 +18,6 @@ func NewClientFromKey(apiKey string, apiSecret string) *Client {
 		BaseURL:   APIBaseURL,
 		apiKey:    apiKey,
 		apiSecret: apiSecret,
-		HTTPClient: &http.Client{
-			Timeout: time.Minute,
-		},
 	}
 }
 
@@ -34,12 +25,12 @@ func NewClientFromKey(apiKey string, apiSecret string) *Client {
 // m Method e.g. "GET", "POST"
 // e Endpoint e.g. "/auth/token"
 // b Body e.g. "{"field": "value"}"
-func (c *Client) NewRequest(m string, e string, b string) LbxdReq {
-	builder := &Builder{}
-	r := builder.
+func (c *Client) NewRequest(m string, e string, d string) LbxdReq {
+	b := &Builder{}
+	r := b.
 		Method(m).
 		Endpoint(e).
-		Body(b).
+		Data(d).
 		APIKey(c.apiKey).
 		Build(c)
 
