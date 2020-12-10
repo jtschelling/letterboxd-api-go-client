@@ -88,8 +88,12 @@ func (b *Builder) buildURL(c *Client) *Builder {
 	sb.WriteString(c.BaseURL)
 	sb.WriteString(b.r.endpoint)
 	sb.WriteString(b.addURLMetadata(c))
-	sb.WriteString("&")
-	sb.WriteString(b.r.data)
+
+	if b.r.data != "" {
+		sb.WriteString("&")
+		sb.WriteString(b.r.data)
+	}
+
 	sb.WriteString("&signature=")
 	sb.WriteString(b.r.signature)
 	b.r.url = sb.String()
@@ -126,13 +130,14 @@ func (b *Builder) buildSalt(c *Client) string {
 
 	// add apikey nonce and timestamp as endpoint parameters
 	sb.WriteString(b.addURLMetadata(c))
-	sb.WriteString("&")
-	sb.WriteString(b.r.data)
+
+	if b.r.data != "" {
+		sb.WriteString("&")
+		sb.WriteString(b.r.data)
+	}
 
 	sb.WriteString("\u0000")
 	sb.WriteString(b.r.body)
-
-	// fmt.Printf("\n\n%+q\n\n", sb.String())
 
 	return sb.String()
 }

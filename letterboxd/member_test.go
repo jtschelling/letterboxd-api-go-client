@@ -4,10 +4,11 @@ import (
 	"testing"
 )
 
-func TestGetUserAccessToken(t *testing.T) {
+func TestGetSelf(t *testing.T) {
 	c := NewClientFromKey("FAKE_KEY", "FAKE_SECRET")
 
-	r, err := c.getUserAccessToken("USERNAME", "PASSWORD")
+	at, _ := c.getUserAccessToken("USERNAME", "PASSWORD")
+	r, err := c.getSelf(at)
 
 	if err != nil {
 		t.Error(r)
