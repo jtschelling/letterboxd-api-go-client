@@ -7,7 +7,8 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-func (c *Client) getUserAccessToken(u string, p string) (string, error) {
+// GetUserAccessToken returns an access token from provided username and password
+func (c *Client) GetUserAccessToken(u string, p string) (string, error) {
 	v := url.Values{}
 	v.Set("grant_type", "password")
 	v.Set("username", u)
