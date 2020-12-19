@@ -74,8 +74,8 @@ type MemberAccount struct {
 	} `json:"member"`
 }
 
-// getSelf retrieves information from the /me endpoint
-func (c *Client) getSelf(at string) (MemberAccount, error) {
+// GetSelf retrieves information from the /me endpoint
+func (c *Client) GetSelf(at string) (MemberAccount, error) {
 	r := c.NewRequest("GET", "/me", "")
 
 	client := resty.New()

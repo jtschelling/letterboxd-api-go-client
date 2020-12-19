@@ -7,8 +7,8 @@ import (
 func TestGetSelf(t *testing.T) {
 	c := NewClientFromKey("FAKE_KEY", "FAKE_SECRET")
 
-	at, _ := c.getUserAccessToken("USERNAME", "PASSWORD")
-	r, err := c.getSelf(at)
+	at, _ := c.GetUserAccessToken("USERNAME", "PASSWORD")
+	r, err := c.GetSelf(at)
 
 	if err != nil {
 		t.Error(r)
