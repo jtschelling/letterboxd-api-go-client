@@ -1,5 +1,5 @@
 on: [push, pull_request]
-name: test
+name: ci
 jobs:
   test:
     strategy:
@@ -12,7 +12,12 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go-version }}
-    - name: Checkout code
+    - name: Checkout
       uses: actions/checkout@v2
+    - name: Lint
+      uses: golangci/golangci-lint-action@v2
+      with:
+        # golangci-lint version. always uses the latest patch version
+        version: v1.33
     - name: Test
-      run: go test ./...
+      run: make test
