@@ -7,8 +7,10 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-// GetUserAccessToken returns an access token from provided username and password
-func (c *Client) GetUserAccessToken(u string, p string) (string, error) {
+// GetAuthToken returns an access token from provided username and password
+func (c *Client) GetAuthToken(u string, p string) (AccessToken, error) {
+	at := AccessToken{}
+
 	v := url.Values{}
 	v.Set("grant_type", "password")
 	v.Set("username", u)
@@ -23,14 +25,13 @@ func (c *Client) GetUserAccessToken(u string, p string) (string, error) {
 		SetHeader("Accept", "application/json").
 		Post(r.url)
 	if err != nil {
-		return "", err
+		return at, err
 	}
 
-	at := AccessToken{}
 	err = json.Unmarshal(resp.Body(), &at)
 	if err != nil {
-		return "", err
+		return at, err
 	}
 
-	return at.AccessToken, nil
+	return at, nil
 }

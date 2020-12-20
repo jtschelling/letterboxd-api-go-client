@@ -5,6 +5,7 @@ import (
 )
 
 func TestNewClientFromKey(t *testing.T) {
+	url := "https://api.letterboxd.com/api/v0"
 	k := "FAKE_KEY"
 	sk := "FAKE_SECRET"
 	c := NewClientFromKey(k, sk)
@@ -14,15 +15,7 @@ func TestNewClientFromKey(t *testing.T) {
 	if c.apiSecret != sk {
 		t.Errorf("Client returned wrong apiSecret field\n\twanted %s\n\tgot %s", sk, c.apiSecret)
 	}
-}
-
-func TestNewRequest(t *testing.T) {
-	k := "FAKE_KEY"
-	sk := "FAKE_SECRET"
-	c := NewClientFromKey(k, sk)
-	r := c.NewRequest("GET", "/fake", "")
-
-	if r.method != "GET" {
-		t.Errorf("Request container wrong method\n\twanted %s\n\tgo %s", "GET", r.method)
+	if c.BaseURL != url {
+		t.Errorf("Client returned wrong BaseURL field\n\twanted %s\n\tgot %s", url, c.BaseURL)
 	}
 }

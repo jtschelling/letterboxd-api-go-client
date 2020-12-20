@@ -1,10 +1,13 @@
 package letterboxd
 
-import (
-	"encoding/json"
-
-	"github.com/go-resty/resty/v2"
-)
+// AccessToken holds information to sign every request with a valid access token
+// data provided by the getAccessToken() function
+type AccessToken struct {
+	AccessToken  string `json:"access_token"`
+	TokenType    string `json:"token_type"`
+	ExpiresIn    int    `json:"expires_in"`
+	RefreshToken string `json:"refresh_token"`
+}
 
 // MemberAccount holds data for a Letterboxd member
 // http://api-docs.letterboxd.com/#/definitions/MemberAccount
@@ -72,27 +75,4 @@ type MemberAccount struct {
 		PrivateWatchlist bool   `json:"privateWatchlist"`
 		Bio              string `json:"bio"`
 	} `json:"member"`
-}
-
-// GetSelf retrieves information from the /me endpoint
-func (c *Client) GetSelf(at string) (MemberAccount, error) {
-	r := c.NewRequest("GET", "/me", "")
-
-	client := resty.New()
-	resp, err := client.R().
-		SetHeader("Content-Type", "application/x-www-form-urlencoded").
-		SetHeader("Accept", "application/json").
-		SetAuthToken(at).
-		Get(r.url)
-	if err != nil {
-		return MemberAccount{}, err
-	}
-
-	ma := MemberAccount{}
-	err = json.Unmarshal(resp.Body(), &ma)
-	if err != nil {
-		return MemberAccount{}, err
-	}
-
-	return ma, nil
 }

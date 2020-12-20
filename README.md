@@ -7,6 +7,8 @@
 
 ## API Access
 
+[API Reference Page](http://api-docs.letterboxd.com/)
+
 The Letterboxd API is in [private beta](https://letterboxd.com/api-beta/). Access can be requested by contacting the Letterboxd team at api@letterboxd.com
 
 ## Installation
@@ -26,6 +28,7 @@ import (
 Refer to the [GoDoc](https://pkg.go.dev/github.com/jtschelling/letterboxd-api-go-client/letterboxd) for more usage information
 
 ```{Golang}
+// main.go
 package main
 
 import (
@@ -34,9 +37,14 @@ import (
 )
 
 func main() {
+    // Create a client object. Requires API keys
     c := l.NewClientFromKey("API_KEY", "API_SECRET")
-    t, _ := c.GetUserAccessToken("USERNAME", "PASSWORD")
-    m, _ := c.GetSelf(t)
+
+    // Retrieve an user session token to provide with most further API requests
+    t, _ := c.GetAuthToken("USERNAME", "PASSWORD")
+
+    // Simple request to get information on currently authorized user
+    m, _ := c.GetMe(t)
 
     fmt.Printf("Auth Token: %s\nMember ID: %s\n", t, m.Member.ID)
 }
@@ -60,4 +68,4 @@ This computation is done in the request builder.
 Issues are tracked on Github and can be submitted [here](https://github.com/jtschelling/letterboxd-api-go-client/issues/new).
 Pull requests are welcome and will be reviewed in a timely manner.
 
-Relevant test updates are required. CI is run on pull request and subsequent commits with Github Actions.
+Please review [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a pull request.

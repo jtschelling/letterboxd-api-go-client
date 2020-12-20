@@ -5,7 +5,7 @@ const (
 	APIBaseURL = "https://api.letterboxd.com/api/v0"
 )
 
-// Client provides a common interface and plain configuration for interacting with this library
+// Client provides a common object and plain configuration for interacting with this library
 type Client struct {
 	BaseURL   string
 	apiKey    string
